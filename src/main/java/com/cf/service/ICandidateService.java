@@ -2,6 +2,8 @@ package com.cf.service;
 
 import java.util.List;
 
+import org.springframework.web.servlet.view.RedirectView;
+
 import com.cf.model.Candidate;
 import com.cf.model.Schedule;
 
@@ -35,4 +37,8 @@ public interface ICandidateService {
 	public List<Candidate> filterByStatus(String status);
 	
 	public List<Candidate> changeCandidateListStatus(List<Candidate> listOfCandidate,String status);
+	
+	public String validateScheduleByCandidate(List<Candidate> listOfCandi,String status);
+	
+	public RedirectView redirectToErrorPage(String error);
 }

@@ -79,7 +79,7 @@ public class ScheduleController {
 
 		List li1 = (List) session.getAttribute("ajax");
 		List<Candidate> li = candidateDao.findAllById(li1);
-
+        String responseString=icandidateService.validateScheduleByCandidate(li,status);
 		Schedule Schedule = new Schedule();
 		List<Candidate> Candidate = icandidateService.viewCandidateList();
 		List<User> user = iUserService.viewUserList();
@@ -93,7 +93,13 @@ public class ScheduleController {
 		mv.addObject("candidate", li);
 		mv.addObject("interviewer", list);
 		mv.addObject("status", status);
+		ModelAndView mvError = new ModelAndView("Error");
+		if (responseString.isBlank())
 		return mv;
+		else {
+			mvError.addObject("errorText", responseString);
+		return 	mvError;
+		}
 	}
 	
 	

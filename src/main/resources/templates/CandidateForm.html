@@ -1,0 +1,357 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<!-- <meta charset="ISO-8859-1"> -->
+<title>Candidate Application</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
+<script type="text/javascript"
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<style type="text/css">
+body {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 100vh;
+	background: #2d2d37;
+	
+ font-family: cambria , sans-serif;
+
+}
+label {
+    color: white;
+    }
+h1 {
+	font-size: 36px;
+	color: white;
+}
+#back 
+{
+
+    line-height: 28px;
+    font-size: 46px;
+    font-weight: bold;
+    margin-top: 11px;
+    margin-left: 21px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: black;
+    color: white;
+}
+.openbutton {
+    
+    color: black;
+    margin-top: -547.39px;
+}
+</style>
+
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js">
+	
+</script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js">
+	
+</script>
+<script type="text/javascript"
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+
+<style>
+/* .openbutton {
+	background-color: lightskyblue;
+	color: black;
+	margin-top: -547.39px;
+}
+ */
+label.error {
+	color: red;
+	font-size: 1rem;
+	display: block;
+	margin-top: 5px;
+}
+.image {
+	background-image: url('/image/jared.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+</style>
+
+<!-- <script>
+	function alert() {
+
+		alert("Canidate Sucessfully registered!!!!");
+
+	}
+</script> -->
+<!-- <link rel="stylesheet" type="text/css" th:href="@{~/css/home.css}"> -->
+</head>
+
+
+<body class="image" style="font-size: large;">
+
+	<nav class="navbar navbar-inverse navbar-fixed-top" style="background-color: black;">
+		<div class="container">
+			<div class="navbar-header">
+				<button id="back" onclick="history.back()">&laquo;</button>
+				<div class="left-links">
+				<a class="navbar-brand" id="anchor" style="color:white;margin-left:-237;" th:href="@{/home}">
+					<b>Home</b></a> 
+					</div>
+				<a class="navbar-brand" style="color:white;margin-left: 1313px;" id="anchor" th:href="@{/logout}"><b>Logout</b>
+				</a>
+
+
+			</div>
+		</div>
+	</nav>
+
+	<br>
+	<br>
+	<div th:insert="sideBar :: header"></div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3" style="margin-top: 52px;">
+
+				<h1>Candidate Registration</h1>
+
+				<form  id="basic-form" method="post" enctype='multipart/form-data'>
+
+
+					<div class="form-group">
+						<label class="control-label" for="name">Name </label> <input id="name" class="form-control" 
+							required autofocus="autofocus" minlength="4" />
+					</div>
+
+					<div class="form-group">
+						<label class="control-label" for="email"> Email </label> <input
+							type="email" id="email" class="form-control"
+							autofocus="autofocus" required />
+					</div>
+
+
+
+					<div class="form-group">
+						<label class="control-label" for="alternateEmail">Alternate
+							Email </label> <input id="alternateEmail" class="form-control" type="email" required
+							autofocus="autofocus" />
+
+					</div>
+
+					<div class="form-group">
+						<label class="control-label" for="Phone">Phone Number</label> <input
+							id="Phone" class="form-control"
+							required autofocus="autofocus" minlength="10"
+							maxlength="10" min="1" />
+
+					</div>
+
+					<div class="form-group">
+						<label class="control-label" for="Phone">Alternate Phone
+							Number </label> <input id="Phone" class="form-control" required
+							autofocus="autofocus"  maxlength="10"
+							min="1" />
+
+					</div>
+
+
+
+
+					<div class="form-group">
+						<label class="control-label" for="qualification">Highest
+							Qualification </label> <select name="qualification" id="qualification"
+							 class="form-control" required
+							autofocus="autofocus">
+							<option value="">--- Select ---</option>
+							<option value="B.Tech" ></option>
+							<option value="B.Sc" ></option>
+							<option value="B.A" ></option>
+							<option value="M.Tech" ></option>
+							<option value="M.Sc" ></option>
+
+
+						</select>
+						
+
+
+					</div>
+
+
+<!-- 
+
+					<div class="form-group">
+						<label class="control-label" for="marks">Marks in cgpa </label> <input
+							id="marks" class="form-control" 
+							autofocus="autofocus" required th:minlength="1" th:maxlength="3"
+							th:min="1" />
+						<p class="alert alert-danger" th:if="${#fields.hasErrors('cgpa')}"
+							th:errors="*{cgpa}" />
+
+					</div>
+
+
+					<div class="form-group">
+						<label class="control-label" for="role">Role Applied </label> <input
+							id="role" class="form-control" th:field="*{roleAppliedFor}"
+							required autofocus="autofocus" />
+						<p class="alert alert-danger"
+							th:if="${#fields.hasErrors('roleAppliedFor')}"
+							th:errors="*{roleAppliedFor}" />
+
+					</div>
+
+
+
+
+
+
+
+					<div class="form-group">
+						<label class="control-label" for="Experience">Experience </label>
+
+						<select name="Experience" id="Experience" th:field="*{experience}"
+							class="form-control" autofocus="autofocus">
+							<option value="">--- Select ---</option>
+							<option th:value="0" th:text="Fresher"></option>
+							<option th:value="0.6" th:text="6months"></option>
+							<option th:value="1" th:text="1year"></option>
+							<option th:value="2" th:text="2year"></option>
+							<option th:value="3" th:text="3year"></option>
+							<option th:value="4" th:text="4year"></option>
+							<option th:value="5" th:text="5year"></option>
+							<option th:value="6" th:text="6year"></option>
+							<option th:value="7" th:text="7year"></option>
+
+						</select>
+						<p class="alert alert-danger"
+							th:if="${#fields.hasErrors('experience')}"
+							th:errors="*{experience}" />
+
+					</div>
+
+					<div class="form-group">
+						<label class="control-label" for="Phone">Current CTC </label> <input
+							id="ctc" class="form-control" th:field="*{currentCtc}" required
+							autofocus="autofocus" placeholder="Enter Ctc if Experienced" />
+
+					</div>
+
+					<div class="form-group">
+						<label class="control-label" for="Phone">Expected CTC </label> <input
+							id="ectc" class="form-control" th:field="*{expectedCtc}" required
+							autofocus="autofocus" placeholder="Enter Ctc if Experienced" />
+
+					</div>
+
+					<div th:if="${resName==null}">
+					<div class="form-group">
+						<label class="control-label" for="resumr">Resume </label> <input
+							type="file" id="role" class="form-control" name="file" 
+							autofocus="autofocus" />
+						<div class="alert alert-danger alert-dismissible"
+							th:if="${param.fileError!= null}">
+							<a th:href="@{/addCandidate}" class="close" data-dismiss="alert"
+								onclick="$('.alert').hide()" aria-label="close">X</a> <span
+								th:text="${param.fileError}"></span>
+						</div>
+					</div>
+					</div>
+					
+					<div th:if="${resName!=null}">
+					<div class="form-group">
+						<label class="control-label" for="resumr">Edit Resume:<span style="color:red;" th:text="${resName}"></span></label> <input
+							type="file" id="role" class="form-control" name="file" 
+							autofocus="autofocus" />
+					</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="control-label" for="name">Domain</label> <select
+							class="form-control" id="testOrder" name="testOrder"
+							th:field="*{domain}" required autofocus="autofocus">
+							<option value="">---Select---</option>
+							<option th:each="domain : ${domain}"
+								th:value="${domain.domainId}" th:text="${domain.domainName}"></option>
+						</select>
+
+					</div>
+
+ -->
+
+					<div class="form-group">
+						<button type="submit" id="submitForm"class="btn btn-success">Register</button>
+
+					</div>
+					<!-- <input type="hidden" th:field="*{candidateId}" /> -->
+
+				</form>
+			</div>
+		</div>
+		<!-- <a th:href="@{/home}" class="btn btn-danger ml-2">Home</a> -->
+	</div>
+	<script>
+	$(function() {
+		$('#submitForm').click(function() {
+			const candidate=new object();
+			candidate.candidateName=document.getElementById("name").innerText;
+			candidate.email=document.getElementById("email").innerText;
+
+			$.ajax({
+
+				url : "http://localhost:9091/candidateFormSubmit",
+
+				type : "POST",
+
+				data : candidate,
+
+				dataType : "json",
+
+				contentType : "application/json; charset=utf-8",
+
+				mimeType : 'application/json',
+
+				success : function(candidate) {
+
+					console.log(candidate);
+
+					return false;
+					
+				}
+
+			});
+		});
+
+	});
+	</script>
+<!-- 	<script >	
+	
+	$(document).ready(function() {
+	    // document is loaded and DOM is ready
+	    if (($("#Experience").val() == 0)) {
+				console.log('in walkin');
+				$("#ctc").attr("readonly", "readonly");
+				$("#ectc").attr("readonly", "readonly");
+			} else {
+				console.log('in online');
+				$("#ctc").removeAttr("readonly");
+				$("#ectc").removeAttr("readonly");
+			}
+	    
+	});
+		$("#Experience").on('change', function() {
+			console.log("ready!");
+			console.log($(this).val());
+			if (($(this).val() == 0)) {
+				console.log('in walkin');
+				$("#ctc").attr("readonly", "readonly");
+				$("#ectc").attr("readonly", "readonly");
+			} else {
+				console.log('in online');
+				$("#ctc").removeAttr("readonly");
+				$("#ectc").removeAttr("readonly");
+			}
+		});
+	</script> -->
+</body>
+</html>

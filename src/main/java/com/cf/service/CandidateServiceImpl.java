@@ -22,6 +22,7 @@ import com.cf.repository.IScheduleDao;
 import lombok.extern.log4j.Log4j2;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.view.RedirectView;
 
 @Log4j2
 @Service
@@ -407,6 +408,42 @@ public List<Candidate> changeCandidateListStatus(List<Candidate> listOfCandidate
 		candidateListAfterUpdate.add(candidate);
 	}
 	return candidateListAfterUpdate;
+}
+
+@Override
+public String validateScheduleByCandidate(List<Candidate> listOfCandi,String status) {
+	// TODO Auto-generated method stub
+	String maxRoundError="";
+	String finalResult="";
+	String fresherError="";
+	for(Candidate candidate:listOfCandi) {
+		System.out.println("max rounds"+candidate.getMaxRound()+"current round"+candidate.getCurrentRound()+"exp"+candidate.getExperience()+"statuscheck: "+status.equalsIgnoreCase("nextTechnicalRound"));
+		if(candidate.getCurrentRound()==candidate.getMaxRound())
+			maxRoundError=""+candidate.getCandidateName()+"("+candidate.getCandidateId()+"),";
+		if((candidate.getExperience()==0)&&(candidate.getCurrentRound()==1)&&(status.equalsIgnoreCase("nextTechnicalRound"))) {
+			fresherError=""+candidate.getCandidateName()+",";
+		}
+			
+	}
+	if(!maxRoundError.isBlank()) {
+		finalResult=maxRoundError+"/n above listed candidates reached max rounds";
+	}
+	if(!fresherError.isBlank()) {
+		finalResult=fresherError+": Cannot Schedule multiple technical rounds for Freshers";
+	}
+	System.out.println("final Result"+finalResult);
+	
+		return finalResult;
+}
+
+@Override
+public RedirectView redirectToErrorPage(String error) {
+	log.info("entred sevice method error page");
+	// TODO Auto-generated method stub
+	RedirectView redirectView = new RedirectView();
+    redirectView.setUrl("/errorPage");
+   // redirectView.addAttribute("error", error);
+    return redirectView;
 }
 
 }

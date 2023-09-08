@@ -41,6 +41,14 @@ public class LoginController implements ErrorController {
 		}
 
 	}
+	
+	@GetMapping( "/errorPage" )
+	public ModelAndView error(@RequestParam String error) {
+ System.out.println("<-----------Entered Error PAge Controller-------------------->"+error);
+		ModelAndView mvError = new ModelAndView("Error");
+		mvError.addObject("errorText", error);
+		return mvError;
+	}
 
 	@GetMapping("/home")
 	public String home(HttpSession session) {
